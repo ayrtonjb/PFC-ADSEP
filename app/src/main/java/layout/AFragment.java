@@ -19,13 +19,13 @@ public class AFragment extends ListFragment {
 
 
     String[] web = {
-            "Google Plus",
-            "Twitter",
-            "Windows",
-            "Bing",
-            "Itunes",
-            "Wordpress",
-            "Drupal"
+            "Serviço 1",
+            "Serviço 2",
+            "Serviço 3",
+            "Serviço 4",
+            "Serviço 5",
+            "Serviço 6",
+            "Serviço 7"
     } ;
     Integer[] imageId = {
             R.drawable.cleanhistory,
@@ -61,8 +61,7 @@ public class AFragment extends ListFragment {
 
         // Instantiating an adapter to store each items
         // R.layout.listview_layout defines the layout of each item
-        SearchView sv=new SearchView(getActivity());
-        sv.findViewById(R.id.searchView);
+
         SimpleAdapter adapter = new SimpleAdapter(getActivity().getBaseContext(), aList, R.layout.list_item, from, to);
 
         setListAdapter(adapter);

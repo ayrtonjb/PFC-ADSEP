@@ -1,9 +1,12 @@
 package com.pfc.ayrton.pfc_adsep;
 
+import android.app.SearchManager;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
@@ -18,7 +21,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import layout.AFragment;
 import layout.BFragment;
@@ -37,6 +42,7 @@ public class TabbedActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     ListView list1;
     ListView list2;
+    TabLayout tabLayout;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -58,17 +64,20 @@ public class TabbedActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-               FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        tabLayout.setOnTabSelectedListener(
+                new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        super.onTabSelected(tab);
+                        if(tab.getPosition()==2){
+                         findViewById(R.id.action_search).setVisibility(View.INVISIBLE);
+                        }
+                        else
+                            findViewById(R.id.action_search).setVisibility(View.VISIBLE);
+                    }
+                });
 
     }
 
@@ -77,6 +86,27 @@ public class TabbedActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_tabbed, menu);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        MenuItemCompat.setOnActionExpandListener(menu.findItem(R.id.action_search), new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                tabLayout.findViewById(R.id.tabs).setVisibility(View.GONE);
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                tabLayout.findViewById(R.id.tabs).setVisibility(View.VISIBLE);
+                //DO SOMETHING WHEN THE SEARCHVIEW IS CLOSING
+
+                return true;
+            }
+        });
+
+
+
         return true;
     }
 
@@ -91,7 +121,11 @@ public class TabbedActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.action_search) {
+            Toast.makeText(getApplicationContext(),"Search Clicked", Toast.LENGTH_SHORT).show();
 
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -139,12 +173,15 @@ public class TabbedActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
            if(position==0){
+
                return new AFragment();
            }
             if(position==1){
+
                 return new BFragment();
             }
             if(position==2){
+
                 return new CFragment();
             }
             else
@@ -161,9 +198,9 @@ public class TabbedActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Servicos";
+                    return "Serviços";
                 case 1:
-                    return "Instituicoes";
+                    return "Instituições";
                 case 2:
                     return "Sobre a App";
             }
