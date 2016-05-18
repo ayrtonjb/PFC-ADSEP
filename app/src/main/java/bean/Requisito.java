@@ -1,4 +1,4 @@
-package com.pfc.ayrton.pfc_adsep;
+package bean;
 
 import java.io.File;
 
@@ -13,11 +13,8 @@ public class Requisito {
     private String descricao;
     private File anexo;
 
-    public Requisito(String id, String nome, String descricao, File anexo) {
-        this.id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.anexo = anexo;
+    public Requisito() {
+
     }
 
 

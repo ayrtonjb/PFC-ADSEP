@@ -1,4 +1,4 @@
-package com.pfc.ayrton.pfc_adsep;
+package lists;
 
 /**
  * Created by Ayrton on 2016-05-07.
@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.pfc.ayrton.pfc_adsep.R;
 
 import java.util.Arrays;
 import java.util.List;

@@ -3,6 +3,7 @@ package com.pfc.ayrton.pfc_adsep;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -13,11 +14,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import bd_stuff.BDConnector;
+import bd_stuff.Backrun;
 import layout.AFragment;
 import layout.BFragment;
 import layout.CFragment;
@@ -36,12 +40,16 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                new Backrun().execute();
+                Toast.makeText(getApplicationContext(), "Backrun acabou!", Toast.LENGTH_LONG).show();
                 Intent ne=new Intent(MainActivity.this,TabbedActivity.class);
 
                 startActivity(ne);
@@ -72,6 +80,8 @@ public class MainActivity extends FragmentActivity {
                 // TODO: Make sure this auto-generated app URL is correct.
                 Uri.parse("android-app://com.pfc.ayrton.pfc_adsep/http/host/path")
         );
+
+
         AppIndex.AppIndexApi.start(client, viewAction);
     }
 

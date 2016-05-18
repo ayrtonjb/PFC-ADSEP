@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import lists.Listas;
+
 
 public class AFragment extends ListFragment {
 
@@ -46,9 +48,9 @@ public class AFragment extends ListFragment {
         // Inflate the layout for this fragment
         List<HashMap<String,String>> aList = new ArrayList<HashMap<String,String>>();
 
-        for(int i=0;i<7;i++){
+        for(int i=0;i<Listas.servicos.size();i++){
             HashMap<String, String> hm = new HashMap<String,String>();
-            hm.put("txt",  web[i]);
+            hm.put("txt",  Listas.servicos.get(i).getNome());
             hm.put("img", Integer.toString(imageId[i]) );
             aList.add(hm);
         }

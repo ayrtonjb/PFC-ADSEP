@@ -1,4 +1,4 @@
-package com.pfc.ayrton.pfc_adsep;
+package bean;
 
 import java.io.File;
 
@@ -11,13 +11,15 @@ public class Servico {
     private String nome;
     private String descricao;
     private String categoriaID;
-    private File anexo;
 
-    public Servico(String id, String nome, String descricao, File anexo, String categoriaID) {
+    public Servico() {
+    }
+
+    public Servico(String id, String nome, String descricao,String categoriaID) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.anexo = anexo;
+
         this.categoriaID = categoriaID;
     }
 
@@ -54,11 +56,4 @@ public class Servico {
         this.categoriaID = categoriaID;
     }
 
-    public File getAnexo() {
-        return anexo;
-    }
-
-    public void setAnexo(File anexo) {
-        this.anexo = anexo;
-    }
 }

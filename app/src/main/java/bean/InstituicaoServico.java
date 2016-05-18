@@ -1,4 +1,4 @@
-package com.pfc.ayrton.pfc_adsep;
+package bean;
 
 /**
  * Created by Ayrton on 2016-05-08.
@@ -9,10 +9,8 @@ public class InstituicaoServico {
     private String instituicaoId;
     private String servicoID;
 
-    public InstituicaoServico(String id, String instituicaoId, String servicoID) {
-        this.id = id;
-        this.instituicaoId = instituicaoId;
-        this.servicoID = servicoID;
+    public InstituicaoServico() {
+
     }
 
     public String getId() {
