@@ -8,7 +8,9 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.pfc.ayrton.pfc_adsep.R;
 
@@ -16,27 +18,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import bean.Instituicao;
+import lists.Listas;
+
 public class BFragment extends ListFragment {
-    String[] instituicoes = {
-            "Instituição 1",
-            "Instituição 2",
-            "Instituição 3",
-            "Instituição 4",
-            "Instituição 5",
-            "Instituição 6",
-            "Instituição 7"
-    } ;
-    Integer[] logos = {
-            R.drawable.cleanhistory,
-            R.drawable.common_full_open_on_phone,
-            R.drawable.common_ic_googleplayservices,
-            R.drawable.feedback,
-            R.drawable.logocontrast_white_scale_180,
-            R.drawable.small_logo_targetsize_48,
-            R.drawable.user40
 
-    };
-
+    ArrayList<Instituicao> instituicoes= Listas.instituicoes;
+    Integer defaultLogo = R.drawable.ic_instituicao_default_48dp;
+    Integer logo;
 
 
     @Override
@@ -45,10 +34,15 @@ public class BFragment extends ListFragment {
         // Inflate the layout for this fragment
         List<HashMap<String,String>> bList = new ArrayList<HashMap<String,String>>();
 
-        for(int i=0;i<7;i++){
+        for(int i=0;i<Listas.instituicoes.size();i++){
             HashMap<String, String> hm = new HashMap<String,String>();
-            hm.put("txt",  instituicoes[i]);
-            hm.put("img", Integer.toString(logos[i]) );
+            hm.put("txt", instituicoes.get(i).getNome());
+
+
+            hm.put("img", Integer.toString(defaultLogo) );
+
+
+
             bList.add(hm);
         }
 
@@ -65,6 +59,21 @@ public class BFragment extends ListFragment {
 
         setListAdapter(adapter);
 
+
+
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+                Toast.makeText(getContext(),"item:"+Listas.instituicoes.get((int) getSelectedItemId()).getNome()+" Clicked", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        super.onViewCreated(view, savedInstanceState);
     }
 }

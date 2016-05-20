@@ -6,7 +6,6 @@ package bean;
 public class ContactoEstabelecimento {
 
     private String id;
-    private String estabelecimento_id;
     private String telefone;
     private String telefone_movel;
     private String fax;
@@ -24,9 +23,7 @@ public class ContactoEstabelecimento {
         this.id = id;
     }
 
-    public void setEstabelecimento_id(String estabelecimento_id) {
-        this.estabelecimento_id = estabelecimento_id;
-    }
+
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
@@ -44,9 +41,7 @@ public class ContactoEstabelecimento {
         this.email = email;
     }
 
-    public String getEstabelecimento_id() {
-        return estabelecimento_id;
-    }
+
 
     public String getTelefone() {
         return telefone;

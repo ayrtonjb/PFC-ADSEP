@@ -36,7 +36,7 @@ public class BDConnector{
 
             Log.d("BD", "sucesso2");
 
-            con= DriverManager.getConnection("jdbc:mysql://10.127.127.1:3306","teste","");
+            con= DriverManager.getConnection("jdbc:mysql://10.127.127.1:3307/db_pfc_adsep","root","root");
             return con;
 
             // return DriverManager.getConnection("jdbc:mysql://10.71.34.1:3306/saa", "root", "choo");
@@ -115,7 +115,7 @@ public class BDConnector{
             while (rs.next()) {
                 Estabelecimento estabelecimento= new Estabelecimento();
 
-                estabelecimento.setId(rs.getString("estabelecimento_id"));
+                estabelecimento.setId(rs.getString("id_estabelecimento"));
                 estabelecimento.setNome(rs.getString("nome"));
                 estabelecimento.setTipo(rs.getString("tipo"));
                 estabelecimento.setInstituicao_id(rs.getString("instituicao_id"));
@@ -240,8 +240,8 @@ public class BDConnector{
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 EstabelecimentoServico estabelecimentoServico = new EstabelecimentoServico();
-                estabelecimentoServico.setId(rs.getString("id_instituicao_servico"));
-                estabelecimentoServico.setEstabelecimento_id(rs.getString("instituicao_id"));
+                estabelecimentoServico.setId(rs.getString("id_estabelecimento_servico"));
+                estabelecimentoServico.setEstabelecimento_id(rs.getString("estabelecimento_id"));
                 estabelecimentoServico.setServico_id(rs.getString("servico_id"));
 
                 Listas.estabelecimentoServicos.add(estabelecimentoServico);
@@ -265,7 +265,6 @@ public class BDConnector{
             while (rs.next()) {
                 ContactoEstabelecimento contactoEstabelecimento = new ContactoEstabelecimento();
                 contactoEstabelecimento.setId(rs.getString("id_contacto_estabelecimento"));
-                contactoEstabelecimento.setEstabelecimento_id(rs.getString("estabelecimento_id"));
                 contactoEstabelecimento.setTelefone(rs.getString("telefone"));
                 contactoEstabelecimento.setTelefone_movel(rs.getString("telefone_movel"));
                 contactoEstabelecimento.setFax(rs.getString("fax"));

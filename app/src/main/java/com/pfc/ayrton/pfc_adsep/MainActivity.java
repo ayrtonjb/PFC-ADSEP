@@ -40,6 +40,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new Backrun().execute();
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -48,7 +49,7 @@ public class MainActivity extends FragmentActivity {
         button.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Backrun().execute();
+
                 Toast.makeText(getApplicationContext(), "Backrun acabou!", Toast.LENGTH_LONG).show();
                 Intent ne=new Intent(MainActivity.this,TabbedActivity.class);
 
