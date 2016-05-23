@@ -1,6 +1,7 @@
 package layout;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
@@ -82,8 +83,9 @@ public class AFragment extends ListFragment {
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                Toast.makeText(getContext(),"item:"+Listas.servicos.get((int) getSelectedItemId()).getNome()+" Clicked", Toast.LENGTH_SHORT).show();
+
                 Listas.servicoEscolhidoId= (int) getSelectedItemId();
+
                 Intent ne=new Intent(getContext(),ServicoActivity.class);
 
                 startActivity(ne);

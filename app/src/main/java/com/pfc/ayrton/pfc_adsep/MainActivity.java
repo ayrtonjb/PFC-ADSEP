@@ -50,7 +50,7 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getApplicationContext(), "Backrun acabou!", Toast.LENGTH_LONG).show();
+
                 Intent ne=new Intent(MainActivity.this,TabbedActivity.class);
 
                 startActivity(ne);
