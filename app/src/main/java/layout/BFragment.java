@@ -1,6 +1,7 @@
 package layout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.pfc.ayrton.pfc_adsep.InstituicaoActivity;
 import com.pfc.ayrton.pfc_adsep.R;
 
 import java.util.ArrayList;
@@ -70,8 +72,11 @@ public class BFragment extends ListFragment {
         getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-                Toast.makeText(getContext(),"item:"+Listas.instituicoes.get((int) getSelectedItemId()).getNome()+" Clicked", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getContext(),"item:"+Listas.instituicoes.get(position).getNome()+" Clicked", Toast.LENGTH_SHORT).show();
+                Intent ne=new Intent(getContext(),InstituicaoActivity.class);
+                Listas.setInstituicaoEscolhidaId(position);
+                ne.putExtra("instituicao_id",Listas.instituicoes.get(position).getId());
+                startActivity(ne);
             }
         });
         super.onViewCreated(view, savedInstanceState);

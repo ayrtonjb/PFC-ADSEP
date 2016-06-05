@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/s"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.pfc.ayrton.pfc_adsep.EstabelecimentoActivity"
+    tools:showIn="@layout/activity_estabelecimento">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Detalhes do Estabelecimento"
+        android:id="@+id/textView10"
+        android:layout_marginTop="43dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tipo:"
+        android:id="@+id/textView11"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/textView10"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filial"
+        android:id="@+id/tipo_estabelecimento"
+        android:layout_alignTop="@+id/textView11"
+        android:layout_alignStart="@+id/endereco_estabelecimento" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Endereco: "
+        android:id="@+id/textView13"
+        android:layout_below="@+id/textView11"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="19dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Av. da Luz, no.: 341"
+        android:id="@+id/endereco_estabelecimento"
+        android:layout_alignBottom="@+id/textView13"
+        android:layout_toEndOf="@+id/textView13"
+        android:layout_marginStart="21dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Horario de Abertura: "
+        android:id="@+id/textView15"
+        android:layout_below="@+id/textView13"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="19dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7h30"
+        android:id="@+id/horario_abertura_estabelecimento"
+        android:layout_alignTop="@+id/textView15"
+        android:layout_alignEnd="@+id/endereco_estabelecimento" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Horario de Encerramento:"
+        android:id="@+id/textView17"
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="24dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15h00"
+        android:id="@+id/horario_encerramento_estabelecimento"
+        android:layout_alignTop="@+id/textView17"
+        android:layout_alignStart="@+id/horario_abertura_estabelecimento" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Contacto"
+        android:id="@+id/textView19"
+        android:layout_below="@+id/textView17"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="36dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telefone:"
+        android:id="@+id/textView20"
+        android:layout_marginTop="26dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/textView19"
+        android:layout_alignStart="@+id/textView22" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="21222222"
+        android:id="@+id/telefone_estabelecimento"
+        android:layout_alignBottom="@+id/textView20"
+        android:layout_alignStart="@+id/endereco_estabelecimento" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cel.:"
+        android:id="@+id/textView22"
+        android:textStyle="bold"
+        android:layout_below="@+id/textView20"
+        android:layout_marginTop="10dp"
+
+        android:layout_alignEnd="@+id/textView11" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="871234567"
+        android:id="@+id/cel_estabelecimento"
+        android:layout_above="@+id/textView24"
+        android:layout_alignStart="@+id/telefone_estabelecimento" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fax:"
+        android:id="@+id/textView24"
+        android:layout_marginTop="19dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/textView22"
+        android:layout_alignStart="@+id/textView22" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="21222221"
+        android:id="@+id/fax_estabelecimento"
+        android:layout_alignBottom="@+id/textView24"
+        android:layout_alignStart="@+id/cel_estabelecimento" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="e-mail:"
+        android:id="@+id/textView26"
+        android:layout_marginTop="18dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/textView24"
+        android:layout_alignStart="@+id/textView24" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1cartorionotarial@notario.gov.mz"
+        android:id="@+id/email_estabelecimento"
+        android:layout_alignBottom="@+id/textView26"
+        android:layout_alignStart="@+id/fax_estabelecimento" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ver no Mapa"
+        android:id="@+id/ver_no_mapa_estabelecimento"
+        android:layout_marginTop="46dp"
+        android:layout_below="@+id/textView26"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
+</ScrollView>

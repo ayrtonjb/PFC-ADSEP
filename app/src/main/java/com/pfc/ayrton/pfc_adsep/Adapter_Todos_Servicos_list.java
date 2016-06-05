@@ -2,43 +2,26 @@ package com.pfc.ayrton.pfc_adsep;
 
 import android.app.SearchManager;
 import android.support.design.widget.TabLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-
 import android.widget.ListView;
-import android.widget.TabHost;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import layout.AFragment;
-import layout.BFragment;
-import layout.CFragment;
+import layout.TodosEstabelecimentosList;
+import layout.TodosServicosList;
 
-public class TabbedActivity extends AppCompatActivity {
+public class Adapter_Todos_Servicos_list extends AppCompatActivity {
 
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-     */
     private SectionsPagerAdapter mSectionsPagerAdapter;
     ListView list1;
     ListView list2;
@@ -51,34 +34,24 @@ public class TabbedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tabbed);
+        setContentView(R.layout.activity_adapter__todos__servicos_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar1 = (Toolbar) findViewById(R.id.toolbarTodosServicos);
+//        setSupportActionBar(toolbar1);
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager = (ViewPager) findViewById(R.id.containerTodosServicos);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.setOnTabSelectedListener(
-                new TabLayout.ViewPagerOnTabSelectedListener(mViewPager) {
-                    @Override
-                    public void onTabSelected(TabLayout.Tab tab) {
-                        super.onTabSelected(tab);
-                        if(tab.getPosition()==2){
-                         findViewById(R.id.action_search).setVisibility(View.INVISIBLE);
-                        }
-                        else
-                         findViewById(R.id.action_search).setVisibility(View.VISIBLE);
-                    }
-                });
+       // tabLayout = (TabLayout) findViewById(R.id.tabsTodosServicos);
+//        tabLayout.setupWithViewPager(mViewPager);
 
+      //  tabLayout.findViewById(R.id.tabsTodosServicos).setVisibility(View.GONE);
+        setTitle("Servicos");
     }
 
 
@@ -92,13 +65,13 @@ public class TabbedActivity extends AppCompatActivity {
         MenuItemCompat.setOnActionExpandListener(menu.findItem(R.id.action_search), new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
-                tabLayout.findViewById(R.id.tabs).setVisibility(View.GONE);
+
                 return true;
             }
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
-                tabLayout.findViewById(R.id.tabs).setVisibility(View.VISIBLE);
+                // tabLayout.findViewById(R.id.tabs).setVisibility(View.VISIBLE);
                 //DO SOMETHING WHEN THE SEARCHVIEW IS CLOSING
 
                 return true;
@@ -147,26 +120,19 @@ public class TabbedActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-           if(position==0){
+            if(position==0){
 
-               return new AFragment();
-           }
-            if(position==1){
-
-                return new BFragment();
+                return new TodosServicosList();
             }
-            if(position==2){
 
-                return new CFragment();
-            }
             else
-            return null;
+                return null;
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 1;
         }
 
         @Override
@@ -174,10 +140,7 @@ public class TabbedActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return "Serviços";
-                case 1:
-                    return "Instituições";
-                case 2:
-                    return "Sobre a App";
+
             }
             return null;
         }

@@ -3,6 +3,7 @@ package com.pfc.ayrton.pfc_adsep;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -12,6 +13,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ public class MainActivity extends FragmentActivity {
 
     ViewPager viewPager = null;
     ActionBar actionBar;
+    public static boolean b=false;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -40,7 +43,9 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new Backrun().execute();
+        final Backrun backrun=new Backrun();
+        backrun.execute();
+
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -50,10 +55,10 @@ public class MainActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
 
-
+                if(Backrun.b==true){
                 Intent ne=new Intent(MainActivity.this,TabbedActivity.class);
 
-                startActivity(ne);
+                startActivity(ne);}
             }
 
 
@@ -62,6 +67,8 @@ public class MainActivity extends FragmentActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
     }
 
     @Override
@@ -84,6 +91,8 @@ public class MainActivity extends FragmentActivity {
 
 
         AppIndex.AppIndexApi.start(client, viewAction);
+
+
     }
 
     @Override
@@ -105,6 +114,24 @@ public class MainActivity extends FragmentActivity {
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
     }
+
+
+    public void backrunAcabou(){
+
+        if (b==false){
+            Log.d("Bckrun","ainda nao acabou");
+
+        }
+
+        else{
+            Intent ne=new Intent(MainActivity.this,TabbedActivity.class);
+
+        startActivity(ne);}
+
+    }
+
+
+
 }
 
 

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pfc.ayrton.pfc_adsep">
-    <permission android:name="com.pfc.ayrton.pfc_adsep.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature"/>
-    <uses-permission android:name="com.pfc.ayrton.pfc_adsep.permission.MAPS_RECEIVE"/>
 
+    <permission
+        android:name="com.pfc.ayrton.pfc_adsep.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.pfc.ayrton.pfc_adsep.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.REAS_GSERVICES"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.REAS_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -19,7 +21,13 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -62,7 +70,25 @@
 
         <activity
             android:name=".EstabelecimentoMapsActivity"
-            android:label="@string/title_activity_estabelecimento_maps"></activity>
+            android:label="@string/title_activity_estabelecimento_maps" />
+        <activity
+            android:name=".InstituicaoActivity"
+            android:label="@string/title_activity_instituicao"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity android:name="layout.TodosEstabelecimentosList" />
+        <activity
+            android:name=".Adapter_Todos_Estabelecimentos_list"
+            android:label="@string/title_activity_adapter__todos__estabelecimentos_list"
+           />
+        <activity
+            android:name=".EstabelecimentoActivity"
+            android:label="@string/title_activity_estabelecimento"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Adapter_Todos_Servicos_list" />
+        <activity android:name="layout.TodosServicosList"></activity>
     </application>
 
 </manifest>

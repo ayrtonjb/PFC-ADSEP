@@ -3,6 +3,8 @@ package bd_stuff;
 import android.util.Log;
 
 
+import com.mysql.jdbc.CommunicationsException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -36,7 +38,8 @@ public class BDConnector{
 
             Log.d("BD", "sucesso2");
 
-            con= DriverManager.getConnection("jdbc:mysql://10.127.127.1:3307/db_pfc_adsep","root","root");
+           // con= DriverManager.getConnection("jdbc:mysql://10.127.127.1:3306/teste","root","");
+            con= DriverManager.getConnection("jdbc:mysql://192.168.82.50:3306/teste","root","");
             return con;
 
             // return DriverManager.getConnection("jdbc:mysql://10.71.34.1:3306/saa", "root", "choo");
@@ -47,13 +50,36 @@ public class BDConnector{
             Log.d("BD", "fail");
         }
 
-        catch (SQLException e) {
+        catch (CommunicationsException e){
+            e.printStackTrace();
+            Log.d("DB", "Connector e null");
+
+            try{
+                con= DriverManager.getConnection("jdbc:mysql://192.168.82.50:3306/teste","root","");
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+
+
+        } catch (SQLException e) {
             e.printStackTrace();
             Log.d("DB", "fail2");
         }
 
-        Log.d("DB", "Connector e null");
-        return con;
+        catch (NullPointerException e){
+            e.printStackTrace();
+            Log.d("DB", "Connector e null");
+
+            try{
+            con= DriverManager.getConnection("jdbc:mysql://192.168.0.186:3306/teste","root","");
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+
+
+        }
+
+        return null;
     }
 
 
@@ -141,7 +167,7 @@ public class BDConnector{
     public static void load_categoria() {
 
         con = getConnection();
-        System.out.println("connectou!");
+
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement("select * from categoria");

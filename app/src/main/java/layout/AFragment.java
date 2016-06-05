@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,9 +85,12 @@ public class AFragment extends ListFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 
-                Listas.servicoEscolhidoId= (int) getSelectedItemId();
+                Listas.setServicoEscolhidoId(position);
+                Log.d("ItemP"," "+id);
+                Log.d("I Id"," "+position);
 
                 Intent ne=new Intent(getContext(),ServicoActivity.class);
+                ne.putExtra("servico_id",Listas.servicos.get(position).getId());
 
                 startActivity(ne);
             }

@@ -1,29 +1,22 @@
 package com.pfc.ayrton.pfc_adsep;
 
 import android.content.Intent;
-import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.location.LocationListener;
 
 import java.util.ArrayList;
 
 import bean.Estabelecimento;
-import bean.EstabelecimentoServico;
+import bean.Instituicao;
 import bean.Requisito;
 import bean.Servico;
-import layout.AFragment;
+import layout.TodosEstabelecimentosList;
 import lists.Listas;
 
 public class ServicoActivity extends AppCompatActivity {
@@ -31,18 +24,31 @@ public class ServicoActivity extends AppCompatActivity {
     TextView estabelecimentoMP;
     GPSTracker gps;
     ArrayList<Estabelecimento> EstabelecimentosDoServico;
+    String ServicoID;
+    Servico Servico;
+    int ServicoPosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_servico);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle extras=getIntent().getExtras();
+        if(extras !=null){
+            ServicoID=extras.getString("servico_id");
+        }
+
+        Servico=findServico(ServicoID);
+
         TextView descricao = (TextView) findViewById(R.id.descricao_servico);
         requisitos = (TextView) findViewById(R.id.requisitos);
-        setTitle(Listas.servicos.get(Listas.servicoEscolhidoId).getNome());
-        descricao.setText(Listas.servicos.get(Listas.servicoEscolhidoId).getDescricao());
-        String req = getRequisitosDoServico(Listas.servicos.get(Listas.servicoEscolhidoId).getId());
+        setTitle(Listas.servicos.get(ServicoPosition).getNome());
+        descricao.setText(Listas.servicos.get(ServicoPosition).getDescricao());
+        String req = getRequisitosDoServico(Listas.servicos.get(ServicoPosition).getId());
         requisitos.setText(req);
+
+        //estabelecimento mais proximo stuff
         estabelecimentoMP= (TextView) findViewById(R.id.estabelecimentoMPTextView);
         estabelecimentoMP.setText(EstabelecimentosDoServico.get(0).getNome());
 
@@ -62,8 +68,39 @@ public class ServicoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FindNearestEstabelecimento(Listas.estabelecimentos);
                 EstabelecimentoMapsActivity.estabelecimento=EstabelecimentosDoServico.get(0);
-                Intent ne=new Intent(getApplicationContext(),EstabelecimentoMapsActivity.class);
+                Intent ne=new Intent(getApplicationContext(),EstabelecimentoActivity.class);
+                //por enquanto o estabelecimento mais proximo e este abaixo
+                ne.putExtra("estabelecimento_id",EstabelecimentosDoServico.get(0).getId());
+                Log.d("Envia:","EstabId:"+EstabelecimentosDoServico.get(0).getId());
+                startActivity(ne);
 
+
+
+            }
+        });
+        Button todosEstabeleciementosButton= (Button) findViewById(R.id.todosEstabelecimentosButton);
+        todosEstabeleciementosButton.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //Listas.setTodosEstabelecimentosListcontroller("Servico");
+                TodosEstabelecimentosList.setInstituicaoId("");
+                TodosEstabelecimentosList.setServicoId(ServicoID);
+                Intent ne=new Intent(getApplicationContext(),Adapter_Todos_Estabelecimentos_list.class);
+
+                startActivity(ne);
+
+
+
+            }
+        });
+
+        Button verDetalhesDaInstituicao= (Button) findViewById(R.id.verDetalhesDaInstituicao);
+        verDetalhesDaInstituicao.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Intent ne=new Intent(getApplicationContext(),InstituicaoActivity.class);
+                ne.putExtra("instituicao_id",findInstituicaoDoServico());
                 startActivity(ne);
 
 
@@ -158,6 +195,33 @@ public class ServicoActivity extends AppCompatActivity {
             // Ask user to enable GPS/network in settings.
             gps.showSettingsAlert();
         }
+    }
+
+    public Servico findServico(String id){
+        Servico servicoEscolhido=new Servico();
+        for (int i2 = 0; i2 < Listas.servicos.size(); i2++) {
+            if (Listas.servicos.get(i2).getId().equalsIgnoreCase(id)) {
+                servicoEscolhido=Listas.servicos.get(i2);
+                ServicoPosition=i2;
+                Log.d("Proc. Estblc.", "Apanhou " + i2);
+            }
+
+        }
+            return servicoEscolhido;
+    }
+
+    public String findInstituicaoDoServico(){
+        Instituicao instituicao=new Instituicao();
+        for (int i2 = 0; i2 < Listas.instituicaoServicos.size(); i2++) {
+            if (Listas.instituicaoServicos.get(i2).getServicoID().equalsIgnoreCase(ServicoID)) {
+                Log.d("Proc. Inst.", "Apanhou instituicao do Servico" + i2);
+                return Listas.instituicaoServicos.get(i2).getInstituicaoId();
+
+            }
+
+        }
+
+    return null;
     }
 
 }
